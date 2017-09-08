@@ -1,0 +1,21 @@
+{
+  "name": "wx-chart-react",
+  "description": "A react adapter for wx-chart",
+  "main": "index.jsx",
+  "authors": [
+    "Jone Casper"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "wx-chart"
+  ],
+  "homepage": "https://github.com/xch89820/wx-chart-react",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
