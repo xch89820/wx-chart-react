@@ -1,6 +1,6 @@
 {
   "name": "wx-chart-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A react adapter for wx-chart",
   "main": "index.jsx",
   "directories": {
@@ -51,9 +51,9 @@
     ]
   },
   "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "wx-chart": "^0.2.2"
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "wx-chart": "^1.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

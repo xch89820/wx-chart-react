@@ -1,7 +1,7 @@
 /*!
  * wx-chart.js
  * Chart for WeiXin application
- * Version: 1.0.0
+ * Version: 1.0.1
  *
  * Copyright 2016 Jone Casper
  * Released under the MIT license
@@ -137,10 +137,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 var _react2 = _interopRequireDefault(_react);
 
-                var _reactDom = typeof window !== "undefined" ? window['ReactDOM'] : typeof global !== "undefined" ? global['ReactDOM'] : null;
-
-                var _reactDom2 = _interopRequireDefault(_reactDom);
-
                 function _interopRequireDefault(obj) {
                     return obj && obj.__esModule ? obj : { default: obj };
                 }
@@ -198,7 +194,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         key: 'componentDidMount',
                         value: function componentDidMount() {
                             var el = this.el;
-                            this._wxChart = this.initChart(el);
+                            var wxChart = this.initChart(el);
+                            var tipEvent = this.props.tooltipEvent || 'mousemove';
+
+                            wxChart.once('draw', function (views) {
+                                var handler = wxChart.mouseoverTooltip(views);
+                                wxChart.canvas.canvasInstance.addEventListener(tipEvent, handler);
+                            });
+
+                            this._wxChart = wxChart;
                         }
                     }, {
                         key: 'componentWillUnmount',
@@ -232,6 +236,77 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 exports.default = WxChartReact;
             }).call(this, typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {});
         }, {}], 3: [function (require, module, exports) {
+            (function (global) {
+                'use strict';
+
+                Object.defineProperty(exports, "__esModule", {
+                    value: true
+                });
+
+                var _createClass = function () {
+                    function defineProperties(target, props) {
+                        for (var i = 0; i < props.length; i++) {
+                            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+                        }
+                    }return function (Constructor, protoProps, staticProps) {
+                        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+                    };
+                }();
+
+                var _react = typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null;
+
+                var _react2 = _interopRequireDefault(_react);
+
+                var _base = require('./base.jsx');
+
+                var _base2 = _interopRequireDefault(_base);
+
+                var _wxChart = typeof window !== "undefined" ? window['WxChart'] : typeof global !== "undefined" ? global['WxChart'] : null;
+
+                function _interopRequireDefault(obj) {
+                    return obj && obj.__esModule ? obj : { default: obj };
+                }
+
+                function _classCallCheck(instance, Constructor) {
+                    if (!(instance instanceof Constructor)) {
+                        throw new TypeError("Cannot call a class as a function");
+                    }
+                }
+
+                function _possibleConstructorReturn(self, call) {
+                    if (!self) {
+                        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+                    }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+                }
+
+                function _inherits(subClass, superClass) {
+                    if (typeof superClass !== "function" && superClass !== null) {
+                        throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+                    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+                }
+
+                var WxBubbleReact = function (_WxChartReact) {
+                    _inherits(WxBubbleReact, _WxChartReact);
+
+                    function WxBubbleReact() {
+                        _classCallCheck(this, WxBubbleReact);
+
+                        return _possibleConstructorReturn(this, (WxBubbleReact.__proto__ || Object.getPrototypeOf(WxBubbleReact)).apply(this, arguments));
+                    }
+
+                    _createClass(WxBubbleReact, [{
+                        key: 'initChart',
+                        value: function initChart(el) {
+                            return new _wxChart.WxBubble(el, this.props);
+                        }
+                    }]);
+
+                    return WxBubbleReact;
+                }(_base2.default);
+
+                exports.default = WxBubbleReact;
+            }).call(this, typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {});
+        }, { "./base.jsx": 2 }], 4: [function (require, module, exports) {
             (function (global) {
                 'use strict';
 
@@ -306,13 +381,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 exports.default = WxDoughnutReact;
             }).call(this, typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {});
-        }, { "./base.jsx": 2 }], 4: [function (require, module, exports) {
+        }, { "./base.jsx": 2 }], 5: [function (require, module, exports) {
             'use strict';
 
             Object.defineProperty(exports, "__esModule", {
                 value: true
             });
-            exports.WxDoughnutReact = exports.WxBarReact = exports.WxLinerReact = undefined;
+            exports.WxBubbleReact = exports.WxDoughnutReact = exports.WxBarReact = exports.WxLinerReact = undefined;
 
             var _liner = require('./liner.jsx');
 
@@ -326,6 +401,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             var _doughnut2 = _interopRequireDefault(_doughnut);
 
+            var _bubble = require('./bubble.jsx');
+
+            var _bubble2 = _interopRequireDefault(_bubble);
+
             function _interopRequireDefault(obj) {
                 return obj && obj.__esModule ? obj : { default: obj };
             }
@@ -333,7 +412,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             exports.WxLinerReact = _liner2.default;
             exports.WxBarReact = _bar2.default;
             exports.WxDoughnutReact = _doughnut2.default;
-        }, { "./bar.jsx": 1, "./doughnut.jsx": 3, "./liner.jsx": 5 }], 5: [function (require, module, exports) {
+            exports.WxBubbleReact = _bubble2.default;
+        }, { "./bar.jsx": 1, "./bubble.jsx": 3, "./doughnut.jsx": 4, "./liner.jsx": 6 }], 6: [function (require, module, exports) {
             (function (global) {
                 'use strict';
 
@@ -408,5 +488,5 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 exports.default = WxLinerReact;
             }).call(this, typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {});
-        }, { "./base.jsx": 2 }] }, {}, [4])(4);
+        }, { "./base.jsx": 2 }] }, {}, [5])(5);
 });

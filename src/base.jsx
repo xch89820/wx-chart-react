@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 class WxChartReact extends React.Component {
     constructor(props) {
@@ -22,7 +21,15 @@ class WxChartReact extends React.Component {
     }
     componentDidMount() {
         let el = this.el;
-        this._wxChart = this.initChart(el);
+        let wxChart = this.initChart(el);
+        let tipEvent = this.props.tooltipEvent || 'mousemove';
+
+        wxChart.once('draw',(views) => {
+            let handler = wxChart.mouseoverTooltip(views);
+            wxChart.canvas.canvasInstance.addEventListener(tipEvent, handler);
+        });
+
+        this._wxChart = wxChart;
     }
 
     componentWillUnmount() {

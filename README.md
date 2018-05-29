@@ -10,7 +10,7 @@ A react adapter for wx-chart
 
 Use NPM:
 ```
-npm i wx-chart-react
+npm i wx-chart-react --save
 ```
 
 Use Bower:
@@ -25,12 +25,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import WxLinerReact from 'wx-chart-react';
 
-// 初始化
+// initialization
 let options = {...};
 const myChart = ReactDOM.render(<WxLinerReact {...options}></WxLinerReact>, 'myCanvas');
 ```
 
-If you want to get more options , please see `wx-chart` documents
+More options, please see [wx-chart](https://github.com/xch89820/wx-chart) documents
+
+#### Special options
+
+##### tooltipEvent
+
+  Set the event type fnor tooltip's component, default is `mousemove`
 
 ## License
 

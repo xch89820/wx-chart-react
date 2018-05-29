@@ -38,7 +38,9 @@ describe('WxLinerReact component test', () => {
             }]
         };
         let body = document.body;
-        const wxElement = ReactDOM.render(<WxLinerReact {...linerProps}></WxLinerReact>, body);
+        let DIV = document.createElement('div');
+        body.appendChild(DIV);
+        const wxElement = ReactDOM.render(<WxLinerReact {...linerProps}></WxLinerReact>, DIV);
 
         wxElement.update([{
             dailyNecessities: 1,
@@ -68,10 +70,10 @@ describe('WxLinerReact component test', () => {
         }]);
     });
 
-    afterEach(() => {
-        // Unmount all element
-        ReactDOM.unmountComponentAtNode(document.body);
-    });
+    // afterEach(() => {
+    //     // Unmount all element
+    //     ReactDOM.unmountComponentAtNode(document.body);
+    // });
 });
 
 

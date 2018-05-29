@@ -37,7 +37,9 @@ describe('WxBarReact component test', () => {
 
         // We want to render it actually
         let body = document.body;
-        const wxElement = ReactDOM.render(<WxBarReact {...barProps}></WxBarReact>, body);
+        let DIV = document.createElement('div');
+        body.appendChild(DIV);
+        const wxElement = ReactDOM.render(<WxBarReact {...barProps}></WxBarReact>, DIV);
         wxElement.update([{
             dailyNecessities: 1,
             fruit: 10,
@@ -67,8 +69,8 @@ describe('WxBarReact component test', () => {
         // const element = TestUtils.renderIntoDocument(<WxBarReact {...barProps}></WxBarReact>);
         // const elementNode = ReactDOM.findDOMNode(element);
     });
-    afterEach(() => {
-        // Unmount all element
-        ReactDOM.unmountComponentAtNode(document.body);
-    });
+    // afterEach(() => {
+    //     // Unmount all element
+    //     ReactDOM.unmountComponentAtNode(document.body);
+    // });
 });

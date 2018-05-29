@@ -16,10 +16,12 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             {pattern: 'test/**/*.css', included: false},
-            'node_modules/react/dist/**',
-            'node_modules/react-dom/dist/**',
+            'node_modules/wx-chart/dist/wx-chart.js',
+            'node_modules/react/umd/react.development.js',
+            'node_modules/react-dom/umd/react-dom.development.js',
             'src/**',
-            'test/*Spec.js'
+             'test/*Spec.js'
+            //'test/chart.wxBubble.Spec.js'
         ],
 
 
@@ -42,7 +44,7 @@ module.exports = function(config) {
                 ['babelify'],
                 ['browserify-replace', {
                     replace: [
-                        { from: /__GLOBAL__DEBUG__WX__/, to: false }
+                        { from: /__GLOBAL__DEBUG__WX__/, to: true }
                     ]
                 }]
             ]

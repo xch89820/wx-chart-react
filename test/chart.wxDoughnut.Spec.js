@@ -17,7 +17,9 @@ describe('WxDoughnutReact component test', () => {
         };
 
         let body = document.body;
-        const wxElement = ReactDOM.render(<WxDoughnutReact {...pieProps}></WxDoughnutReact>, body);
+        let DIV = document.createElement('div');
+        body.appendChild(DIV);
+        const wxElement = ReactDOM.render(<WxDoughnutReact {...pieProps}></WxDoughnutReact>, DIV);
 
         wxElement.update([{
             label: '一月',
@@ -42,8 +44,8 @@ describe('WxDoughnutReact component test', () => {
         }])
     });
 
-    afterEach(() => {
-        // Unmount all element
-        ReactDOM.unmountComponentAtNode(document.body);
-    });
+    // afterEach(() => {
+    //     // Unmount all element
+    //     ReactDOM.unmountComponentAtNode(document.body);
+    // });
 });
